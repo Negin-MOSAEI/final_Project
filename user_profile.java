@@ -8,12 +8,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 class user_profile extends JFrame implements User, ActionListener {
+    //declare instance variebles
     String user_name;
     String phone;
     String email;
     int balance;
     Boolean is_admin;
     JButton products= new JButton("products");
+    //method to fill user informatin based on username
     public void fill_info(String username) {
         User user = null;
         String query = "SELECT PHONE, EMAIL,BALANCE,ADMIN FROM users WHERE USERNAME = ?";
@@ -34,6 +36,7 @@ class user_profile extends JFrame implements User, ActionListener {
             e.printStackTrace();
         }
     }
+    //constructor for user profile class
     public user_profile(String name){
         this.setTitle("profile");
         this.setSize(500, 500);
@@ -46,6 +49,7 @@ class user_profile extends JFrame implements User, ActionListener {
         products.addActionListener(this);
         panell();
     }
+    //method to set up the panels for user profile information
     public void panell() {
         JPanel toppanel = new JPanel();
         toppanel.setBackground(Color.cyan);
@@ -76,7 +80,7 @@ class user_profile extends JFrame implements User, ActionListener {
         this.add(toppanel);
         this.add(BottomPanel);
     }
-
+//action performed method for actionListener interface
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==products){
