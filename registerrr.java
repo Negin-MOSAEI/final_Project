@@ -185,11 +185,23 @@ class register extends JFrame implements ActionListener {
                 email.setText("");
                 adminpass.setText("");
             }
+            if (user_name.getText().length() < 5) {
+                JOptionPane.showMessageDialog(null, " address must be at least 4 characters long");
+            } else if (phone.getText().length() < 5) {
+                JOptionPane.showMessageDialog(null, " number must be at least 4 characters long");
+            } else if (!phone.getText().matches("^98\\\\d{10}$")) {
+                JOptionPane.showMessageDialog(null, " number must contain only numbers");
+            } else if (user_name.getText().length() < 5) {
+                JOptionPane.showMessageDialog(null, "user name must be at least 4 characters long");
+            } else if (pass.getText().length() < 5) {
+                JOptionPane.showMessageDialog(null, "password must be at least 4 characters long");
+            } else if (!pass.getText().matches(".*[A-Z].*") || !pass.getText().matches(".*[a-z].*") ) {
+                JOptionPane.showMessageDialog(null, "password must contain uppercase and lowercase latters");
+            }
+
             else{
                 this.dispose();
                 writedb(user_name.getText(),pass.getText(),phone.getText(),email.getText(),admincheck);
                 user_profile user=new user_profile(user_name.getText());
             }
-        }
-    }
-}
+        }}}
