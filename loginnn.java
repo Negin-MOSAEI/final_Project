@@ -11,11 +11,25 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 class login extends JFrame implements ActionListener {
     JButton register = new JButton("register");
     JButton enter = new JButton("enter");
     JTextField user_name = new JTextField("user name");
     JTextField pass = new JTextField("password");
+    //this method hashes the given password using SHA-256 algorithem
+    private static String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = md.digest(password.getBytes());
+            return Base64.getEncoder().encodeToString(hashedBytes);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    //this method checks if the user with given username and password exists in database
     public static Boolean checkUser(String username,String password) {
 
         User user = null;
@@ -25,7 +39,7 @@ class login extends JFrame implements ActionListener {
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
+            preparedStatement.setString(2, hashPassword(password));
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
@@ -36,6 +50,8 @@ class login extends JFrame implements ActionListener {
         }
         return false;
     }
+    //constructs a new login object .
+    //set up the login window with necessary components and events listeners
     login(){
         this.setTitle("login");
         this.setSize(500, 500);
@@ -46,6 +62,7 @@ class login extends JFrame implements ActionListener {
         enter.addActionListener(this);
         panell();
     }
+    //creat and configures the ui commponents of the login window
     public void panell(){
         JPanel base_panel=new JPanel();
         base_panel.setBackground(Color.gray);
