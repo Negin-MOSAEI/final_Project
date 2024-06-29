@@ -21,6 +21,7 @@ class login extends JFrame implements ActionListener {
     JTextField pass = new JTextField("password");
     //this method hashes the given password using SHA-256 algorithem
     private static String hashPassword(String password) {
+        // i serched on google for this part
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] hashedBytes = md.digest(password.getBytes());
