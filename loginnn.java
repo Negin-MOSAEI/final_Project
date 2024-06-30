@@ -19,6 +19,7 @@ class login extends JFrame implements ActionListener {
     JButton enter = new JButton("enter");
     JTextField user_name = new JTextField("user name");
     JTextField pass = new JTextField("password");
+
     //this method hashes the given password using SHA-256 algorithem
     private static String hashPassword(String password) {
         // i serched on google for this part
@@ -30,8 +31,9 @@ class login extends JFrame implements ActionListener {
             throw new RuntimeException(e);
         }
     }
+
     //this method checks if the user with given username and password exists in database
-    public static Boolean checkUser(String username,String password) {
+    public static Boolean checkUser(String username, String password) {
 
         User user = null;
         String query = "SELECT USERNAME,PASSWORD FROM users WHERE USERNAME = ? AND PASSWORD = ?";
@@ -51,9 +53,10 @@ class login extends JFrame implements ActionListener {
         }
         return false;
     }
+
     //constructs a new login object .
     //set up the login window with necessary components and events listeners
-    login(){
+    login() {
         this.setTitle("login");
         this.setSize(500, 500);
         this.setLayout(null);
@@ -63,46 +66,64 @@ class login extends JFrame implements ActionListener {
         enter.addActionListener(this);
         panell();
     }
+
     //creat and configures the ui commponents of the login window
-    public void panell(){
-        JPanel base_panel=new JPanel();
+    public void panell() {
+        JPanel base_panel = new JPanel();
         base_panel.setBackground(Color.gray);
-        base_panel.setSize(500,500);
+        base_panel.setSize(500, 500);
         base_panel.setLayout(null);
-        JLabel text= new JLabel("write your information");
+        JLabel text = new JLabel("write your information");
         user_name.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 user_name.setText("");
             }
+
             @Override
-            public void mousePressed(MouseEvent e) {}
+            public void mousePressed(MouseEvent e) {
+            }
+
             @Override
-            public void mouseReleased(MouseEvent e) {}
+            public void mouseReleased(MouseEvent e) {
+            }
+
             @Override
-            public void mouseEntered(MouseEvent e) {}
+            public void mouseEntered(MouseEvent e) {
+            }
+
             @Override
-            public void mouseExited(MouseEvent e) {}
+            public void mouseExited(MouseEvent e) {
+            }
         });
         pass.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 pass.setText("");
             }
+
             @Override
-            public void mousePressed(MouseEvent e) {}
+            public void mousePressed(MouseEvent e) {
+            }
+
             @Override
-            public void mouseReleased(MouseEvent e) {}
+            public void mouseReleased(MouseEvent e) {
+            }
+
             @Override
-            public void mouseEntered(MouseEvent e) {}
+            public void mouseEntered(MouseEvent e) {
+            }
+
+
             @Override
-            public void mouseExited(MouseEvent e) {}
+            public void mouseExited(MouseEvent e) {
+            }
         });
         text.setBounds(180, 30, 200, 30);
-        enter.setBounds(30,420,100,30);
-        register.setBounds(360,420,100,30);
-        user_name.setBounds(150,260,200,30);
-        pass.setBounds(150,300,200,30);
+        enter.setBounds(30, 420, 100, 30);
+        register.setBounds(360, 420, 100, 30);
+        user_name.setBounds(150, 260, 200, 30);
+        pass.setBounds(150, 300, 200, 30);
         base_panel.add(text);
         base_panel.add(enter);
         base_panel.add(register);
@@ -110,21 +131,20 @@ class login extends JFrame implements ActionListener {
         base_panel.add(user_name);
         this.add(base_panel);
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==register){
+        if (e.getSource() == register) {
             new register();
             this.dispose();
-        }
-        else if(e.getSource()==enter){
-            if(checkUser(user_name.getText(),pass.getText())){
+        } else if (e.getSource() == enter) {
+            if (checkUser(user_name.getText(), pass.getText())) {
                 this.dispose();
-                user_profile user=new user_profile(user_name.getText());
-            }
-           else{
+                user_profile user = new user_profile(user_name.getText());
+            } else {
                 user_name.setText("wrong info");
                 pass.setText("");
-           }
+            }
         }
     }
-}
+} 
