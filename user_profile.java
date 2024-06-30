@@ -80,12 +80,12 @@ class user_profile extends JFrame implements User, ActionListener {
         this.add(toppanel);
         this.add(BottomPanel);
     }
-//action performed method for actionListener interface
+    //action performed method for actionListener interface
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==products){
             this.dispose();
-            new Product_list(user_name);
+            new Product_list(user_name,is_admin);
         }
     }
 }
