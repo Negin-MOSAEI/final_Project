@@ -64,7 +64,8 @@ class register extends JFrame implements ActionListener {
             preparedStatement.setString(5, admincheck.toString());
             preparedStatement.setString(6, "0");
             int rowsAffected = preparedStatement.executeUpdate();
-            
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -178,6 +179,7 @@ class register extends JFrame implements ActionListener {
             public void mouseExited(MouseEvent e) {}
         });
         //adding components to the panel
+
         base_panel.add(text);
         base_panel.add(submit);
         base_panel.add(login);
@@ -211,12 +213,12 @@ class register extends JFrame implements ActionListener {
                 adminpass.setText("");
             }
             //validate the langth and format of user inputs
-             else if (user_name.getText().length() <4) {
+            else if (user_name.getText().length() <4) {
                 JOptionPane.showMessageDialog(null, " address must be at least 4 characters long");
             } else if (phone.getText().length() < 4) {
                 JOptionPane.showMessageDialog(null, " number must be at least 4 characters long");
-            } else if (!phone.getText().matches("^98\\\\d{10}$")) {
-                JOptionPane.showMessageDialog(null, " number must contain only numbers");
+            } else if (!phone.getText().matches("^98\\d{10}$")) {
+                JOptionPane.showMessageDialog(null, " number must be valid");
             } else if (user_name.getText().length() < 4) {
                 JOptionPane.showMessageDialog(null, "user name must be at least 4 characters long");
             } else if (pass.getText().length() < 4) {
@@ -230,4 +232,6 @@ class register extends JFrame implements ActionListener {
                 writedb(user_name.getText(),pass.getText(),phone.getText(),email.getText(),admincheck);
                 user_profile user=new user_profile(user_name.getText());
             }
-        }}}
+        }
+    }
+} 
