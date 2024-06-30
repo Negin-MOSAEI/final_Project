@@ -64,11 +64,7 @@ class register extends JFrame implements ActionListener {
             preparedStatement.setString(5, admincheck.toString());
             preparedStatement.setString(6, "0");
             int rowsAffected = preparedStatement.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Saved successfully");
-            } else {
-                System.out.println("Error");
-            }
+            
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -215,15 +211,15 @@ class register extends JFrame implements ActionListener {
                 adminpass.setText("");
             }
             //validate the langth and format of user inputs
-            if (user_name.getText().length() < 5) {
+             else if (user_name.getText().length() <4) {
                 JOptionPane.showMessageDialog(null, " address must be at least 4 characters long");
-            } else if (phone.getText().length() < 5) {
+            } else if (phone.getText().length() < 4) {
                 JOptionPane.showMessageDialog(null, " number must be at least 4 characters long");
             } else if (!phone.getText().matches("^98\\\\d{10}$")) {
                 JOptionPane.showMessageDialog(null, " number must contain only numbers");
-            } else if (user_name.getText().length() < 5) {
+            } else if (user_name.getText().length() < 4) {
                 JOptionPane.showMessageDialog(null, "user name must be at least 4 characters long");
-            } else if (pass.getText().length() < 5) {
+            } else if (pass.getText().length() < 4) {
                 JOptionPane.showMessageDialog(null, "password must be at least 4 characters long");
             } else if (!pass.getText().matches(".*[A-Z].*") || !pass.getText().matches(".*[a-z].*") ) {
                 JOptionPane.showMessageDialog(null, "password must contain uppercase and lowercase latters");
